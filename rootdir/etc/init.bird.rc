@@ -1,0 +1,53 @@
+# ==============================================
+# bird init rc
+# author: chengting
+# ==============================================
+
+import ${ro.mtkrc.path}init.microarary.rc
+import ${ro.mtkrc.path}init.csfinger.rc
+import ${ro.mtkrc.path}init.cdfinger.rc
+# ==============================================
+on init
+
+
+# ==============================================
+on post-fs
+
+
+# ==============================================
+on post-fs-data
+    # for FactoryTest & MMITest
+    chmod 0666 /dev/msensor
+    chmod 0666 /dev/gsensor
+    chmod 0666 /dev/als_ps
+    chmod 0777 /dev/kd_camera_hw
+    
+    # gsensor & psensor calibration file
+    mkdir /data/birdsensor 0777 system system
+
+    # bprop
+    mkdir /data/birdprop 0777 system system
+		#camera_info
+		mkdir /data/camera_info 0770 root system
+
+	#birdsw
+        mkdir /proc/android_touch/SMWP 0777 system system
+	mkdir /data/birdsw 0777 system system
+
+
+# ==============================================
+on boot
+
+
+# ================  services  ==================
+# bwrite
+service bwrite /system/bin/bwrite
+    user root
+    group root
+    oneshot
+
+
+
+
+
+
